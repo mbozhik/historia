@@ -81,6 +81,25 @@ const config = {
     plugin(function sizePlugin(api) {
       api.matchUtilities({s: (value: string) => ({width: value, height: value})}, {values: api.theme('width')})
     }),
+
+    plugin(function percentagePlugin(api) {
+      const createPercentageUtil = (property) => (value) => {
+        return {[property]: `${value.replace(/[^\d]/g, '')}%`}
+      }
+
+      const values = Array.from({length: 100}, (_, i) => `${i}`)
+
+      api.matchUtilities(
+        {
+          ww: createPercentageUtil('width'),
+          hh: createPercentageUtil('height'),
+        },
+        {
+          values,
+        },
+      )
+    }),
+
     require('tailwindcss-animate'),
   ],
 } satisfies Config
