@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+mark {
+  @apply block bg-neutral-500 rounded-[4px] text-white w-fit px-2 py-1;
+}
+
 @layer base {
   :root {
     --background: #ffffff;
