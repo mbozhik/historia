@@ -17,6 +17,10 @@ export const headerData = {
       text: 'Войти',
       link: '/api/auth/signin',
     },
+    'sign-out': {
+      text: 'Выйти',
+      link: '/api/auth/signout',
+    },
     register: {
       text: 'Создать аккаунт',
       link: '/register',
