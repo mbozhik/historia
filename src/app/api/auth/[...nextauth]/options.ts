@@ -78,15 +78,23 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
+  session: {
+    maxAge: 300, /// 300ms (5 min)
+  },
+  jwt: {
+    maxAge: 300,
+  },
   callbacks: {
     async session({session, token, user}) {
       if (token) {
         session.user.id = token.id as string
         session.user.username = token.login as string
+        console.log('🚀 ~ session ~ token:', {session, token, user})
       }
       return session
     },
     async jwt({token, user}) {
+      console.log('🚀 ~ jwt ~ jwt:', {token, user})
       if (user) {
         token.id = user.id
         token.login = user.login
