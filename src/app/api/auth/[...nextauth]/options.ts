@@ -35,8 +35,6 @@ export const options: NextAuthOptions = {
             const userData = loginResponse.data
             console.log('🚀 ~ authorize ~ loginResponse.data:', userData)
 
-            console.log('🚀 ~ authorize ~ login used to find user:', credentials.login)
-
             try {
               const userResponse = await axios.get(api.url + api.routes.all_users, {
                 headers: {
@@ -45,10 +43,7 @@ export const options: NextAuthOptions = {
               })
 
               const users = userResponse.data.users
-              console.log('🚀 ~ authorize ~ users:', users)
-
               const matchingUser = users.find((user) => user.login === credentials.login)
-              console.log('🚀 ~ authorize ~ matchingUser:', matchingUser)
 
               if (matchingUser) {
                 return {
@@ -79,27 +74,27 @@ export const options: NextAuthOptions = {
     }),
   ],
   session: {
-    maxAge: 300, /// 300ms (5 min)
+    maxAge: 300,
   },
   jwt: {
     maxAge: 300,
   },
   callbacks: {
-    async session({session, token, user}) {
-      if (token) {
-        session.user.id = token.id as string
-        session.user.username = token.login as string
-        console.log('🚀 ~ session ~ token:', {session, token, user})
-      }
-      return session
-    },
     async jwt({token, user}) {
       console.log('🚀 ~ jwt ~ jwt:', {token, user})
       if (user) {
-        token.id = user.id
-        token.login = user.login
+        token.id = user.id as string
+        token.login = user.login as string
       }
       return token
+    },
+    async session({session, token}) {
+      console.log('🚀 ~ session ~ session:', {session, token})
+      if (token) {
+        session.user.id = token.id as string
+        session.user.username = token.login as string
+      }
+      return session
     },
   },
 }
