@@ -12,15 +12,15 @@ export const headerData = {
   account: {
     sign_in: {
       text: 'Войти',
-      link: '/api/auth/signin',
+      // link: '/api/auth/signin',
     },
     sign_out: {
       text: 'Выйти',
-      link: '/api/auth/signout',
+      // link: '/api/auth/signout',
     },
-    register: {
+    sign_up: {
       text: 'Создать аккаунт',
-      link: '/register',
+      // link: '/sign_up',
     },
   },
 }

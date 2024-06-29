@@ -8,8 +8,8 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        login: {label: 'Login', type: 'text', placeholder: 'user4'},
-        password: {label: 'Password', type: 'password'},
+        login: {label: 'Login', type: 'text', placeholder: 'login', autocomplete: 'username'},
+        password: {label: 'Password', type: 'password', autocomplete: 'current-password'},
       },
       async authorize(credentials: {login: string; password: string}) {
         if (!credentials || !credentials.login || !credentials.password) {
