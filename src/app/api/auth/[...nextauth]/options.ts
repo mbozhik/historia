@@ -8,7 +8,7 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        login: {label: 'Username', type: 'text', placeholder: 'user4'},
+        login: {label: 'Login', type: 'text', placeholder: 'user4'},
         password: {label: 'Password', type: 'password'},
       },
       async authorize(credentials: {login: string; password: string}) {
@@ -33,7 +33,7 @@ export const options: NextAuthOptions = {
 
           if (loginResponse.status === 200) {
             const userData = loginResponse.data
-            console.log('🚀 ~ authorize ~ loginResponse.data:', userData)
+            // console.log('🚀 ~ authorize ~ loginResponse.data:', userData)
 
             try {
               const userResponse = await axios.get(api.url + api.routes.all_users, {
@@ -49,6 +49,10 @@ export const options: NextAuthOptions = {
                 return {
                   id: matchingUser.id,
                   login: matchingUser.login,
+                  email: matchingUser.email,
+                  phone_number: matchingUser.phone_number,
+                  photo: matchingUser.photo,
+                  access_token: userData.access_token,
                 }
               } else {
                 console.error('No matching user found')
@@ -81,19 +85,10 @@ export const options: NextAuthOptions = {
   },
   callbacks: {
     async jwt({token, user}) {
-      console.log('🚀 ~ jwt ~ jwt:', {token, user})
-      if (user) {
-        token.id = user.id as string
-        token.login = user.login as string
-      }
-      return token
+      return {...token, ...user}
     },
     async session({session, token}) {
-      console.log('🚀 ~ session ~ session:', {session, token})
-      if (token) {
-        session.user.id = token.id as string
-        session.user.username = token.login as string
-      }
+      session.user = token as any
       return session
     },
   },

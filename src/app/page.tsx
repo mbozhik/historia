@@ -6,11 +6,11 @@ import Container from '#/Global/Container'
 
 export default async function IndexPage() {
   const session = await getServerSession(options)
+  console.log(session)
 
   return (
     <Container>
-      <h1>{JSON.stringify(session, null, 2)}</h1>
-      <mark className={cn('w-full text-center', session ? 'bg-green-400' : 'bg-red-500')}>{session ? session.user.username : 'NO USER'}</mark>
+      <mark className={cn('w-full text-center', session ? 'bg-green-400' : 'bg-red-500')}>{session ? session.user.email : 'NO USER'}</mark>
     </Container>
   )
 }
