@@ -14,7 +14,7 @@ export const containerSize = {
 }
 
 export default function Container({children, width = '2/3', padding = true, className}: Props) {
-  const containerStyles = `${containerSize.default} ${containerSize[width]} ${padding && 'pt-10'} ${cn(className)}`
+  const containerStyles = `${containerSize.default} ${containerSize[width]} ${padding && 'pt-24'} ${cn(className)}`
 
   return <main className={cn(containerStyles, className)}>{children}</main>
 }
