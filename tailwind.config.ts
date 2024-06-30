@@ -13,14 +13,12 @@ const config = {
         '2xl': '1400px',
       },
     },
+    screens: {
+      xl: {max: '1536px'},
+      md: {max: '1024px'},
+      sm: {max: '428px'},
+    },
     extend: {
-      screens: {
-        xl: {max: '1536px'},
-        lg: {max: '1024px'},
-        sm: {max: '768px'},
-        xs: {max: '350px'},
-      },
-
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',

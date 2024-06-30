@@ -5,12 +5,13 @@ import {SubmitHandler, useForm} from 'react-hook-form'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {signIn} from 'next-auth/react'
 
+import Link from 'next/link'
+import Image from 'next/image'
+import SignInImage from '%/auth/sign-in.jpg'
+
 import Input from '#/UI/Input'
 import Button from '#/UI/Button'
 const screenHeight = 'h-svh h-screen'
-
-import Image from 'next/image'
-import SignInImage from '%/auth/sign-in.jpg'
 
 const schema = z.object({
   login: z.string().min(3, 'Login must be at least 3 characters long'),
@@ -52,11 +53,11 @@ export default function SignIn() {
   }
 
   return (
-    <section data-section="sign-in" className={`grid place-items-center space-y-5 ${screenHeight}`} onSubmit={handleSubmit(onSubmit)}>
-      <div className={`grid ${gridConfig.parent} items-center p-10 gap-10 w-[50%] min-h-[60vh] bg-background-alt rounded-4xl shadow-[0_4px_40px_0px_rgba(0,0,0,0.05)]`}>
-        <form className={`flex flex-col justify-between gap-10 ${gridConfig.auth} col-s`}>
-          <div className="text-center">
-            <h1 className="mb-2 text-6xl font-semibold tracking-tight">
+    <section data-section="sign-in" className={`grid place-items-center space-y-5 ${screenHeight}`}>
+      <div className={`grid ${gridConfig.parent} sm:block items-center p-10 md:p-6 sm:px-4 sm:py-10 gap-10 md:gap-6 w-[50%] min-h-[60vh] xl:w-[60%] md:w-[90%] sm:min-h-0 bg-background-alt rounded-4xl shadow-[0_4px_40px_0px_rgba(0,0,0,0.05)]`}>
+        <form className={`flex flex-col justify-between gap-10 sm:gap-7 ${gridConfig.auth} col-s`} onSubmit={handleSubmit(onSubmit)}>
+          <div className="text-center sm:-space-y-1">
+            <h1 className="mb-2 text-6xl font-semibold tracking-tight xl:text-5xl sm:leading-[1.10]">
               Welcome <br /> to Historia
             </h1>
             <p className="text-lg">New fanfiction platform </p>
@@ -68,11 +69,19 @@ export default function SignIn() {
               <Input name="password" register={register} type="password" placeholder="Password" autoComplete="current-password" error={errors.password} />
             </div>
 
-            <Button buttonText="Sign in" className="w-full" isSubmitting={isSubmitting} error={errors.root} />
+            <div className="space-y-2 md:space-y-3">
+              <Button buttonText="Sign in" className="w-full" isSubmitting={isSubmitting} error={errors.root} />
+              <div className="flex gap-2 mx-auto text-sm md:gap-3 xl:gap-3 w-fit">
+                <span>Is it our first meeting?</span>
+                <Link className="font-medium underline duration-200 text-primary hover:no-underline" href="/sign-up">
+                  Sign up
+                </Link>
+              </div>
+            </div>
           </div>
         </form>
 
-        <Image quality={100} className={`block object-cover rounded-xl s-full ${gridConfig.image}`} src={SignInImage} alt="Sign in" />
+        <Image quality={100} className={`sm:hidden block object-cover rounded-xl s-full ${gridConfig.image}`} src={SignInImage} alt="Sign in" />
       </div>
     </section>
   )
