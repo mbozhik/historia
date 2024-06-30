@@ -21,9 +21,9 @@ export default function HeaderAuth({session, headerData}) {
           <button onClick={() => signIn()} className="duration-200 hover:text-neutral-400">
             {headerData.account.sign_in.text}
           </button>
-          {/* <Link href={headerData.account.sign_up.link} className="duration-200 hover:text-neutral-400">
+          <Link href="/sign-up" className="duration-200 hover:text-neutral-400">
             {headerData.account.sign_up.text}
-          </Link> */}
+          </Link>
         </>
       )}
     </div>
