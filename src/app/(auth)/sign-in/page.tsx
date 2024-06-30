@@ -5,8 +5,8 @@ import {SubmitHandler, useForm} from 'react-hook-form'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {signIn} from 'next-auth/react'
 
-import {cn} from '@/lib/utils'
 import Input from '#/UI/Input'
+import Button from '#/UI/Button'
 const screenHeight = 'h-svh h-screen'
 
 const schema = z.object({
@@ -50,10 +50,7 @@ export default function SignIn() {
         <Input name="login" register={register} type="text" placeholder="Username" autoComplete="username" error={errors.login} />
         <Input name="password" register={register} type="password" placeholder="Password" autoComplete="current-password" error={errors.password} />
 
-        <button className={cn('py-2 duration-200 rounded-md bg-neutral-400 hover:opacity-85', isSubmitting ? 'bg-neutral-200' : '')} disabled={isSubmitting}>
-          {isSubmitting ? 'Wait..' : 'Sign in'}
-        </button>
-        {errors.root && <span className="text-sm text-center text-red-500">{errors.root.message}</span>}
+        <Button buttonText="Sign in" className="w-full" isSubmitting={isSubmitting} error={errors.root} />
       </form>
     </section>
   )

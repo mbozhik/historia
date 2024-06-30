@@ -12,6 +12,10 @@ mark {
     --background-alt: #fcfcfc;
     --foreground: #050505;
 
+    --primary: #33595a;
+    --primary-hover: #264142;
+    --secondary: #ceeec3;
+
     --custom-white: #fcfcfc;
     --custom-black: #050505;
     --custom-grey: #b2b2b2;

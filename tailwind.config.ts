@@ -26,6 +26,12 @@ const config = {
         foreground: 'var(--foreground)',
         'background-alt': 'var(--background-alt)',
 
+        primary: {
+          DEFAULT: 'var(--primary)',
+          hover: 'var(--primary-hover)',
+        },
+        secondary: 'var(--secondary)',
+
         custom: {
           white: 'var(--custom-white)',
           black: 'var(--custom-black)',
