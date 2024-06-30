@@ -6,6 +6,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import {signIn} from 'next-auth/react'
 
 import {cn} from '@/lib/utils'
+import Input from '#/UI/Input'
 const screenHeight = 'h-svh h-screen'
 
 const schema = z.object({
@@ -46,11 +47,8 @@ export default function SignIn() {
       <form className="flex flex-col p-5 w-[15%] gap-2 bg-background-alt rounded-4xl">
         <h1 className="mb-2 text-xl">Sign in</h1>
 
-        <input {...register('login')} className="px-3 py-2 rounded-md bg-neutral-200" type="text" placeholder="Username" autoComplete="username" />
-        {errors.login && <span className="text-sm text-red-500">{errors.login.message}</span>}
-
-        <input {...register('password')} className="px-3 py-2 rounded-md bg-neutral-200" type="password" placeholder="Password" autoComplete="current-password" />
-        {errors.password && <span className="text-sm text-red-500">{errors.password.message}</span>}
+        <Input name="login" register={register} type="text" placeholder="Username" autoComplete="username" error={errors.login} />
+        <Input name="password" register={register} type="password" placeholder="Password" autoComplete="current-password" error={errors.password} />
 
         <button className={cn('py-2 duration-200 rounded-md bg-neutral-400 hover:opacity-85', isSubmitting ? 'bg-neutral-200' : '')} disabled={isSubmitting}>
           {isSubmitting ? 'Wait..' : 'Sign in'}
