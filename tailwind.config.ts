@@ -22,44 +22,42 @@ const config = {
       },
 
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        'background-alt': 'var(--background-alt)',
+
+        custom: {
+          white: 'var(--custom-white)',
+          black: 'var(--custom-black)',
+          grey: 'var(--custom-grey)',
         },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+
+        tags: {
+          favorite: 'var(--favorite)',
+          warning: 'var(--warning)',
+          status: {
+            completed: 'var(--status-completed)',
+            process: 'var(--status-process)',
+            frozen: 'var(--status-frozen)',
+          },
+          genre: {
+            jen: 'var(--genre-jen)',
+            another: 'var(--genre-another)',
+            femslash: 'var(--genre-femslash)',
+            slash: 'var(--genre-slash)',
+            get: 'var(--genre-get)',
+          },
+          rating: {
+            nc21: 'var(--raiting-nc21)',
+            nc17: 'var(--raiting-nc17)',
+            r: 'var(--raiting-r)',
+            pg13: 'var(--raiting-pg13)',
+            g: 'var(--raiting-g)',
+          },
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        '4xl': '30px',
       },
       keyframes: {
         'accordion-down': {

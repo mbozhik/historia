@@ -43,7 +43,7 @@ export default function SignIn() {
 
   return (
     <section data-section="sign-in" className={`grid place-items-center space-y-5 ${screenHeight}`} onSubmit={handleSubmit(onSubmit)}>
-      <form className="flex flex-col p-5 w-[15%] gap-2 rounded-sm bg-neutral-100">
+      <form className="flex flex-col p-5 w-[15%] gap-2 bg-background-alt rounded-4xl">
         <h1 className="mb-2 text-xl">Sign in</h1>
 
         <input {...register('login')} className="px-3 py-2 rounded-md bg-neutral-200" type="text" placeholder="Username" autoComplete="username" />
