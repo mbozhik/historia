@@ -48,14 +48,14 @@ export default function SignIn() {
 
   const gridConfig = {
     parent: 'grid-cols-10',
-    auth: 'col-span-4 md:col-span-5',
+    form: 'col-span-4 md:col-span-5',
     image: 'col-span-6 md:col-span-5',
   }
 
   return (
     <section data-section="sign-in" className={`grid place-items-center space-y-5 ${screenHeight}`}>
       <div className={`grid ${gridConfig.parent} sm:block items-center p-10 md:p-6 sm:px-4 sm:py-10 gap-10 md:gap-6 w-[50%] min-h-[60vh] xl:w-[60%] md:w-[90%] sm:min-h-0 bg-background-alt rounded-4xl shadow-[0_4px_40px_0px_rgba(0,0,0,0.05)]`}>
-        <form className={`flex flex-col justify-between gap-10 sm:gap-7 ${gridConfig.auth} col-s`} onSubmit={handleSubmit(onSubmit)}>
+        <form className={`flex flex-col justify-between gap-10 sm:gap-7 ${gridConfig.form} col-s`} onSubmit={handleSubmit(onSubmit)}>
           <div className="text-center sm:-space-y-1">
             <h1 className="mb-2 text-6xl font-semibold tracking-tight xl:text-5xl sm:leading-[1.10]">
               Welcome <br /> to Historia

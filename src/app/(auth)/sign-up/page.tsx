@@ -6,7 +6,8 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import axios from 'axios'
 import {signIn} from 'next-auth/react'
 
-import {cn} from '@/lib/utils'
+import Input from '#/UI/Input'
+import Button from '#/UI/Button'
 import {api} from '@/lib/backendApi'
 
 const screenHeight = 'h-svh h-screen'
@@ -56,22 +57,12 @@ export default function SignUp() {
       <form className="flex flex-col p-5 w-[15%] gap-2 rounded-sm bg-neutral-100" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="mb-2 text-xl">Register</h1>
 
-        <input {...register('login')} className="px-3 py-2 rounded-md bg-neutral-200" type="text" placeholder="Username" autoComplete="username" />
-        {errors.login && <span className="text-sm text-red-500">{errors.login.message}</span>}
+        <Input name="login" register={register} type="text" placeholder="Username" autoComplete="username" error={errors.login} />
+        <Input name="email" register={register} type="email" placeholder="Email" autoComplete="email" error={errors.email} />
+        <Input name="phone_number" register={register} type="text" placeholder="Phone Number" autoComplete="tel" error={errors.phone_number} />
+        <Input name="password" register={register} type="password" placeholder="Password" autoComplete="new-password" error={errors.password} />
 
-        <input {...register('email')} className="px-3 py-2 rounded-md bg-neutral-200" type="email" placeholder="Email" autoComplete="email" />
-        {errors.email && <span className="text-sm text-red-500">{errors.email.message}</span>}
-
-        <input {...register('phone_number')} className="px-3 py-2 rounded-md bg-neutral-200" type="text" placeholder="Phone Number" autoComplete="tel" />
-        {errors.phone_number && <span className="text-sm text-red-500">{errors.phone_number.message}</span>}
-
-        <input {...register('password')} className="px-3 py-2 rounded-md bg-neutral-200" type="password" placeholder="Password" autoComplete="new-password" />
-        {errors.password && <span className="text-sm text-red-500">{errors.password.message}</span>}
-
-        <button className={cn('py-2 duration-200 rounded-md bg-neutral-400 hover:opacity-85', isSubmitting ? 'bg-neutral-200' : '')} disabled={isSubmitting}>
-          {isSubmitting ? 'Wait..' : 'Create user'}
-        </button>
-        {errors.root && <span className="text-sm text-center text-red-500">{errors.root.message}</span>}
+        <Button buttonText="Create user" className="w-full" isSubmitting={isSubmitting} error={errors.root} />
       </form>
     </section>
   )
