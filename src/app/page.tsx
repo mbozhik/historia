@@ -11,6 +11,7 @@ export default async function IndexPage() {
   return (
     <Container>
       <mark className={cn('w-full text-center', session ? 'bg-green-400' : 'bg-red-500')}>{session ? session.user.email : 'NO USER'}</mark>
+      {session.user.access_token && <mark className={cn('w-full text-center mt-2', session ? 'bg-green-400' : 'bg-red-500')}>{session.user.access_token}</mark>}
     </Container>
   )
 }
