@@ -5,5 +5,6 @@ export const api = {
     login: '/api/auth/login',
     new_user: '/api/user/add_user',
     user_by_id: '/api/user/user_by_id',
+    user_avatar: '/api/user/add_user_file',
   },
 }

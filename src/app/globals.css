@@ -6,6 +6,10 @@ mark {
   @apply block bg-neutral-500 rounded-[4px] text-white w-fit px-2 py-1;
 }
 
+.SCREEN_HEIGHT {
+  @apply h-svh h-screen;
+}
+
 @layer base {
   :root {
     --background: #f2f2f2;
