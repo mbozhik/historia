@@ -9,6 +9,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import SignInImage from '%/auth/sign-in.jpg'
 
+import Heading from '#/UI/Heading'
 import Input from '#/UI/Input'
 import Button from '#/UI/Button'
 const screenHeight = 'h-svh h-screen'
@@ -57,9 +58,7 @@ export default function SignIn() {
       <div className={`grid ${gridConfig.parent} sm:block items-center p-10 md:p-6 sm:px-4 sm:py-10 gap-10 md:gap-6 w-[50%] min-h-[60vh] xl:w-[60%] md:w-[90%] sm:min-h-0 bg-background-alt rounded-4xl shadow-[0_4px_40px_0px_rgba(0,0,0,0.05)]`}>
         <form className={`flex flex-col justify-between gap-10 sm:gap-7 ${gridConfig.form} col-s`} onSubmit={handleSubmit(onSubmit)}>
           <div className="text-center sm:-space-y-1">
-            <h1 className="mb-2 text-6xl font-semibold tracking-tight xl:text-5xl sm:leading-[1.10]">
-              Welcome <br /> to Historia
-            </h1>
+            <Heading type="h1" text="Welcome <br /> to Historia" className={`mb-2 text-center`} />
             <p className="text-lg">New fanfiction platform </p>
           </div>
 

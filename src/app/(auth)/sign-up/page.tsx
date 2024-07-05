@@ -6,6 +6,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import axios from 'axios'
 import {signIn} from 'next-auth/react'
 
+import Heading from '#/UI/Heading'
 import Input from '#/UI/Input'
 import Button from '#/UI/Button'
 import {api} from '@/lib/backendApi'
@@ -67,7 +68,7 @@ export default function SignUp() {
   return (
     <section data-section="sign-up" className={`grid place-items-center space-y-5 ${screenHeight}`}>
       <div className={`grid ${gridConfig.parent} sm:block items-center p-10 md:p-6 sm:px-4 sm:py-10 gap-10 md:gap-6 w-[50%] min-h-[60vh] xl:w-[60%] md:w-[90%] sm:min-h-0 bg-background-alt rounded-4xl shadow-[0_4px_40px_0px_rgba(0,0,0,0.05)]`}>
-        <h1 className={`mb-2 text-6xl text-center font-semibold tracking-tight xl:text-5xl sm:leading-[1.10] ${gridConfig.text}`}>We would be a great team!</h1>
+        <Heading type="h1" text="We would be a great team!" className={`mb-2 text-center ${gridConfig.text}`} />
 
         <form className={`flex flex-col gap-5 bg-background rounded-lg p-5 ${gridConfig.form}`} onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-1.5 [&>*]:bg-background-alt">
