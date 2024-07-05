@@ -12,6 +12,8 @@ export default async function ProfilePage() {
     <Container dataSection="user-profile" className="space-y-10">
       <Hero session={session} />
 
+      <Navigation />
+
       <section>
         <p>Читательский кабинет</p>
       </section>

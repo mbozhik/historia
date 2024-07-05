@@ -24,4 +24,18 @@ export const websitePaths = {
       link: '/sign-up',
     },
   },
+  profile: {
+    reader: {
+      text: 'Читательский кабинет',
+      link: '/profile/reader',
+    },
+    author: {
+      text: 'Авторский кабинет',
+      link: '/profile/author',
+    },
+    settings: {
+      text: 'Настройки',
+      link: '/profile/settings',
+    },
+  },
 }
