@@ -6,7 +6,7 @@ import {signIn, signOut} from 'next-auth/react'
 
 import Link from 'next/link'
 
-export default function HeaderAuth({session, headerData}) {
+export default function HeaderAuth({session, websitePaths}) {
   const setSession = useSessionStore((state) => state.setSession)
 
   useEffect(() => {
@@ -22,20 +22,20 @@ export default function HeaderAuth({session, headerData}) {
     <div className="space-x-4 sm:hidden">
       {session ? (
         <>
-          <Link href="/profile" className="duration-200 hover:text-neutral-400">
+          <Link href={websitePaths.auth.profile.link} className="duration-200 hover:text-neutral-400">
             {session.user.email}
           </Link>
           <button onClick={() => signOut()} className="duration-200 hover:text-neutral-400">
-            {headerData.account.sign_out.text}
+            {websitePaths.auth.sign_out.text}
           </button>
         </>
       ) : (
         <>
           <button onClick={() => signIn()} className="duration-200 hover:text-neutral-400">
-            {headerData.account.sign_in.text}
+            {websitePaths.auth.sign_in.text}
           </button>
-          <Link href="/sign-up" className="duration-200 hover:text-neutral-400">
-            {headerData.account.sign_up.text}
+          <Link href={websitePaths.auth.sign_up.link} className="duration-200 hover:text-neutral-400">
+            {websitePaths.auth.sign_up.text}
           </Link>
         </>
       )}

@@ -3,7 +3,7 @@ import {options} from '@/app/api/auth/[...nextauth]/options'
 
 import Link from 'next/link'
 import {containerSize} from '#/Global/Container'
-import {headerData} from '@/lib/constants'
+import {websitePaths} from '@/lib/constants'
 import HeaderAuth from './HeaderAuth'
 
 export default async function Header() {
@@ -16,7 +16,7 @@ export default async function Header() {
           <Link href="/" className="rounded-md bg-neutral-500 s-10"></Link>
 
           <div className="space-x-4 sm:hidden">
-            {Object.entries(headerData.main).map(([key, {text, link}]) => (
+            {Object.entries(websitePaths.main).map(([key, {text, link}]) => (
               <Link href={link} className="duration-200 hover:text-neutral-400" key={key}>
                 {text}
               </Link>
@@ -24,7 +24,7 @@ export default async function Header() {
           </div>
         </div>
 
-        <HeaderAuth session={session} headerData={headerData} />
+        <HeaderAuth session={session} websitePaths={websitePaths} />
       </div>
     </header>
   )

@@ -1,4 +1,4 @@
-export const headerData = {
+export const websitePaths = {
   main: {
     about: {
       text: 'О нас',
@@ -9,7 +9,10 @@ export const headerData = {
       link: '/contacts',
     },
   },
-  account: {
+  auth: {
+    profile: {
+      link: '/profile/reader',
+    },
     sign_in: {
       text: 'Войти',
     },
@@ -18,6 +21,7 @@ export const headerData = {
     },
     sign_up: {
       text: 'Создать аккаунт',
+      link: '/sign-up',
     },
   },
 }
