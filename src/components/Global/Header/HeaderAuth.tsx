@@ -22,7 +22,7 @@ export default function HeaderAuth({session, headerData}) {
     <div className="space-x-4 sm:hidden">
       {session ? (
         <>
-          <Link href="/" className="duration-200 hover:text-neutral-400">
+          <Link href="/profile" className="duration-200 hover:text-neutral-400">
             {session.user.email}
           </Link>
           <button onClick={() => signOut()} className="duration-200 hover:text-neutral-400">
