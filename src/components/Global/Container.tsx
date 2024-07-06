@@ -10,8 +10,8 @@ interface Props {
 
 export const containerSize = {
   default: 'mx-auto flex-auto',
-  '1/2': 'w-[40%] xl:w-[90%]',
-  '2/3': 'w-[80%] xl:w-[90%]',
+  '1/2': 'w-[45%] xl:w-[60%]',
+  '2/3': 'w-[80%]',
 }
 
 export default function Container({children, width = '2/3', padding = true, className, dataSection}: Props) {
