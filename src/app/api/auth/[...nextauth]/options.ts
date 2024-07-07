@@ -1,7 +1,34 @@
 import type {NextAuthOptions} from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+
+import {jwtDecode} from 'jwt-decode'
+import {encrypt} from '@/utils/encryption'
+
 import axios from 'axios'
 import {api} from '@/lib/backendApi'
+
+async function refreshAccessToken(token) {
+  const resp = await fetch(`${process.env.KEYCLOAK_REFRESH_TOKEN}`, {
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams({
+      client_id: process.env.KEYCLOAK_ID,
+      client_secret: process.env.KEYCLOAK_SECRET,
+      grant_type: 'refresh_token',
+      refresh_token: token.refresh_token,
+    }),
+    method: 'POST',
+  })
+  const refreshToken = await resp.json()
+  if (!resp.ok) throw refreshToken
+
+  return {
+    ...token,
+    access_token: refreshToken.access_token,
+    decoded: jwtDecode(refreshToken.access_token),
+    expires_in: Math.floor(Date.now() / 1000) + refreshToken.expires_in,
+    refresh_token: refreshToken.refresh_token,
+  }
+}
 
 export const options: NextAuthOptions = {
   providers: [
@@ -53,6 +80,8 @@ export const options: NextAuthOptions = {
                   phone_number: matchingUser.phone_number,
                   photo: matchingUser.photo,
                   access_token: userData.access_token,
+                  refresh_token: userData.refresh_token,
+                  expires_in: userData.expires_in,
                 }
               } else {
                 console.error('No matching user found')
@@ -80,18 +109,39 @@ export const options: NextAuthOptions = {
   pages: {
     signIn: '/sign-in',
   },
-  session: {
-    maxAge: 300,
-  },
-  jwt: {
-    maxAge: 300,
-  },
   callbacks: {
     async jwt({token, user}) {
-      return {...token, ...user}
+      console.log('Session Callback:', {token, user})
+      const nowTimeStamp: number = Math.floor(Date.now() / 1000)
+
+      if (user) {
+        // user is only available the first time this callback is called on a new session (after the user signs in)
+        token.decoded = jwtDecode(user.access_token)
+        token.access_token = user.access_token
+        token.expires_in = user.expires_in as number
+        token.refresh_token = user.refresh_token
+        return token
+      } else if (typeof token.expires_in === 'number' && nowTimeStamp < token.expires_in) {
+        // token has not expired yet, return it
+        return token
+      } else {
+        // token is expired, try to refresh it
+        console.log('Token has expired. Will refresh...')
+        try {
+          const refreshedToken = await refreshAccessToken(token)
+          console.log('Token is refreshed.')
+          return refreshedToken
+        } catch (error) {
+          console.error('Error refreshing access token', error)
+          return {...token, error: 'RefreshAccessTokenError'}
+        }
+      }
     },
     async session({session, token}) {
-      session.user = token as any
+      console.log('Session Callback:', {session, token})
+
+      session.access_token = encrypt(token.access_token)
+      session.error = token.error
       return session
     },
   },

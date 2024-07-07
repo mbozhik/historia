@@ -3,6 +3,8 @@ import NextAuth from 'next-auth'
 
 declare module 'next-auth' {
   interface Session {
+    access_token: any
+    error: any
     user: {
       id: string
       login: string
@@ -20,5 +22,7 @@ declare module 'next-auth' {
     phone_number: string
     photo: string
     access_token: string
+    refresh_token: string
+    expires_in: number
   }
 }
