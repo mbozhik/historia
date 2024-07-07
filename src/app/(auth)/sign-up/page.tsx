@@ -70,8 +70,8 @@ export default function SignUp() {
       <div className={`grid ${gridConfig.parent} sm:block items-center p-10 md:p-6 sm:px-4 sm:py-10 gap-10 md:gap-6 w-[50%] min-h-[60vh] xl:w-[60%] md:w-[90%] sm:min-h-0 bg-background-alt rounded-4xl shadow-[0_4px_40px_0px_rgba(0,0,0,0.05)]`}>
         <Heading type="h1" text="We would be a great team!" className={`mb-2 text-center ${gridConfig.text}`} />
 
-        <form className={`flex flex-col gap-5 bg-background rounded-lg p-5 ${gridConfig.form}`} onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-1.5 [&>*]:bg-background-alt">
+        <form className={`flex flex-col gap-5 bg-background rounded-4xl px-4 py-5 ${gridConfig.form}`} onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-2 [&>*]:bg-background-alt">
             <Input name="login" register={register} type="text" placeholder="Username" autoComplete="username" error={errors.login} />
             <Input name="email" register={register} type="email" placeholder="Email" autoComplete="email" error={errors.email} />
             <Input name="phone_number" register={register} type="text" placeholder="Phone Number" autoComplete="tel" error={errors.phone_number} />

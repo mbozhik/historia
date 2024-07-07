@@ -56,14 +56,14 @@ export default function SignIn() {
   return (
     <section data-section="sign-in" className={`grid place-items-center space-y-5 ${screenHeight}`}>
       <div className={`grid ${gridConfig.parent} sm:block items-center p-10 md:p-6 sm:px-4 sm:py-10 gap-10 md:gap-6 w-[50%] min-h-[60vh] xl:w-[60%] md:w-[90%] sm:min-h-0 bg-background-alt rounded-4xl shadow-[0_4px_40px_0px_rgba(0,0,0,0.05)]`}>
-        <form className={`flex flex-col justify-between gap-10 sm:gap-7 ${gridConfig.form} col-s`} onSubmit={handleSubmit(onSubmit)}>
+        <form className={`flex flex-col justify-between gap-10 xl:gap-7 ${gridConfig.form} col-s`} onSubmit={handleSubmit(onSubmit)}>
           <div className="text-center sm:-space-y-1">
             <Heading type="h1" text="Welcome <br /> to Historia" className={`mb-2 text-center`} />
-            <p className="text-lg">New fanfiction platform </p>
+            <p className="text-lg xl:text-base">New fanfiction platform </p>
           </div>
 
-          <div className="space-y-3">
-            <div className="space-y-1.5">
+          <div className="space-y-4">
+            <div className="space-y-2">
               <Input name="login" register={register} type="text" placeholder="Username" autoComplete="username" error={errors.login} />
               <Input name="password" register={register} type="password" placeholder="Password" autoComplete="current-password" error={errors.password} />
             </div>
@@ -80,7 +80,7 @@ export default function SignIn() {
           </div>
         </form>
 
-        <Image quality={100} className={`sm:hidden block object-cover rounded-xl s-full ${gridConfig.image}`} src={SignInImage} alt="Sign in" />
+        <Image quality={100} className={`sm:hidden block object-cover rounded-4xl s-full ${gridConfig.image}`} src={SignInImage} alt="Sign in" />
       </div>
     </section>
   )

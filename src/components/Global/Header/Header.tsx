@@ -14,7 +14,7 @@ export default async function Header() {
     <header className="fixed w-full py-4 text-xl bg-background sm:text-lg font-book">
       <div className={`flex items-center justify-between mx-auto ${containerSize['2/3']}`}>
         <div className="flex items-center gap-6">
-          <Link href="/" className="rounded-md bg-neutral-500 s-10"></Link>
+          <Link href="/" className="rounded-md bg-primary hover:bg-primary-hover duration-300 s-10"></Link>
 
           <div className="space-x-4 sm:hidden">
             {Object.entries(mainLinks).map(([key, {text, link}]) => (
