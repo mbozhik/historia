@@ -1,23 +1,12 @@
 'use client'
 
 import {useEffect} from 'react'
-import {useSessionStore} from '@/store/session-store'
 import {signIn, signOut} from 'next-auth/react'
 
 import Link from 'next/link'
 
 export default function HeaderAuth({session, websitePaths}) {
-  const setSession = useSessionStore((state) => state.setSession)
   const {profile, sign_out, sign_in, sign_up} = websitePaths.auth
-
-  useEffect(() => {
-    if (session == null) {
-      setSession(session)
-      console.log('yes', session)
-    } else {
-      console.log('no', session)
-    }
-  }, [session, setSession])
 
   return (
     <div className="space-x-4 sm:hidden">

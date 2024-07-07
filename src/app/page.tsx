@@ -6,7 +6,7 @@ import Container from '#/Global/Container'
 
 export default async function IndexPage() {
   const session = await getServerSession(options)
-  // console.log(session)
+  console.log(session)
 
   return (
     <Container>

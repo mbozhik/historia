@@ -1,98 +1,52 @@
 import type {NextAuthOptions} from 'next-auth'
-import CredentialsProvider from 'next-auth/providers/credentials'
-import axios from 'axios'
-import {api} from '@/lib/backendApi'
+import KeycloakProvider from 'next-auth/providers/keycloak'
+
+import {jwtDecode} from 'jwt-decode'
+import {encrypt} from '@/utils/encryption'
 
 export const options: NextAuthOptions = {
   providers: [
-    CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        login: {label: 'Login', type: 'text', placeholder: 'login', autocomplete: 'username'},
-        password: {label: 'Password', type: 'password', autocomplete: 'current-password'},
-      },
-      async authorize(credentials: {login: string; password: string}) {
-        if (!credentials || !credentials.login || !credentials.password) {
-          console.error('Missing credentials')
-          return null
-        }
-
-        try {
-          const loginResponse = await axios.post(
-            api.url + api.routes.login,
-            {
-              login: credentials.login,
-              password: credentials.password,
-            },
-            {
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            },
-          )
-
-          if (loginResponse.status === 200) {
-            const userData = loginResponse.data
-            // console.log('🚀 ~ authorize ~ loginResponse.data:', userData)
-
-            try {
-              const userResponse = await axios.get(api.url + api.routes.all_users, {
-                headers: {
-                  Authorization: `Bearer ${userData.access_token}`,
-                },
-              })
-
-              const users = userResponse.data.users
-              const matchingUser = users.find((user) => user.login === credentials.login)
-
-              if (matchingUser) {
-                return {
-                  id: matchingUser.id,
-                  login: matchingUser.login,
-                  email: matchingUser.email,
-                  phone_number: matchingUser.phone_number,
-                  photo: matchingUser.photo,
-                  access_token: userData.access_token,
-                }
-              } else {
-                console.error('No matching user found')
-                return null
-              }
-            } catch (userError) {
-              console.error('Error fetching user data:', userError.response ? userError.response.data : userError)
-              return null
-            }
-          } else {
-            console.error('Login response status not 200:', loginResponse.status)
-            return null
-          }
-        } catch (error) {
-          if (error.response) {
-            console.error('Error logging in:', error.response.data)
-          } else {
-            console.error('Error logging in:', error.message)
-          }
-          return null
-        }
-      },
+    KeycloakProvider({
+      clientId: process.env.KEYCLOAK_ID,
+      clientSecret: process.env.KEYCLOAK_SECRET,
+      issuer: process.env.KEYCLOAK_ISSUER,
+      idToken: true,
+      checks: ['none'],
     }),
   ],
-  pages: {
-    signIn: '/sign-in',
-  },
-  session: {
-    maxAge: 300,
-  },
-  jwt: {
-    maxAge: 300,
-  },
   callbacks: {
-    async jwt({token, user}) {
-      return {...token, ...user}
+    async jwt({token, account}) {
+      console.log('JWT Callback:', {token, account})
+      const nowTimeStamp: number = Math.floor(Date.now() / 1000)
+
+      if (account) {
+        // account is only available on a new session (after the user signs in)
+        token.decoded = jwtDecode(account.access_token)
+        token.access_token = account.access_token
+        token.id_token = account.id_token
+        token.expires_at = account.expires_at as number
+        token.refresh_token = account.refresh_token
+        return token
+      } else if (typeof token.expires_at === 'number' && nowTimeStamp < token.expires_at) {
+        // token has not expired yet, return it
+        return token
+      } else {
+        // token is expired, try to refresh it
+        console.log('Token has expired. Will refresh...')
+        return token
+      }
     },
     async session({session, token}) {
-      session.user = token as any
+      console.log('Session Callback:', {session, token})
+
+      session.access_token = encrypt(token.access_token)
+      session.id_token = encrypt(token.id_token)
       return session
+    },
+    async redirect({url, baseUrl}) {
+      const redirectUrl = url.startsWith('/') ? new URL(url, baseUrl).toString() : url
+      console.log(`[next-auth] Redirecting to "${redirectUrl}" (resolved from url "${url}" and baseUrl "${baseUrl}")`)
+      return redirectUrl
     },
   },
 }
