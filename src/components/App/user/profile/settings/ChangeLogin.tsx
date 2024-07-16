@@ -2,10 +2,20 @@
 
 import {useForm} from 'react-hook-form'
 
+import Heading from '#/UI/Heading'
 import Input from '#/UI/Input'
 import Button from '#/UI/Button'
 
-export default function ChangeLogin() {
+const ChangeLoginElement = ({register, errors, text, name, type, placeholder}) => {
+  return (
+    <div className="space-y-3.5">
+      <Heading type="h3" text={text} className="font-normal" />
+      <Input name={name} register={register} type={type} className="bg-background-alt" placeholder={placeholder} error={errors[name]} />
+    </div>
+  )
+}
+
+export default function ChangeLogin({session}) {
   const {
     register,
     handleSubmit,
@@ -18,11 +28,14 @@ export default function ChangeLogin() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <section className="space-y-2">
-        <Input name="login" register={register} type="text" className="bg-background-alt" placeholder="New Username" error={errors.login} />
-        <Input name="password" register={register} type="password" className="bg-background-alt" placeholder="New Password" error={errors.password} />
-        <Input name="email" register={register} type="email" className="bg-background-alt" placeholder="New Email" error={errors.email} />
-        <Button buttonText="Update Profile" className="w-full mt-4" isSubmitting={isSubmitting} />
+      <section className="space-y-5">
+        <div className="space-y-7">
+          <ChangeLoginElement text="Изменить логин" name="username" type="text" placeholder={session.user.login} register={register} errors={errors} />
+          <ChangeLoginElement text="Изменить почту" name="email" type="email" placeholder={session.user.email} register={register} errors={errors} />
+          <ChangeLoginElement text="Изменить пароль" name="password" type="text" placeholder="••••••" register={register} errors={errors} />
+        </div>
+
+        <Button buttonText="Сохранить" className="w-full mt-4" isSubmitting={isSubmitting} />
       </section>
     </form>
   )
