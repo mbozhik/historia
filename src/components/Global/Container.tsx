@@ -11,7 +11,7 @@ interface Props {
 export const containerSize = {
   default: 'mx-auto flex-auto',
   '1/2': 'w-[45%] xl:w-[60%]',
-  '2/3': 'w-[80%]',
+  '2/3': 'w-[80%] xl:w-[85%] sm:w-[92.5%]',
 }
 
 export default function Container({children, width = '2/3', padding = true, className, dataSection}: Props) {
