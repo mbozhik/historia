@@ -3,4 +3,4 @@
 import {getServerSession} from 'next-auth/next'
 import {options} from '@/app/api/auth/[...nextauth]/options'
 
-export const getSession = () => getServerSession(options)
+export const getSession = async () => await getServerSession(options)

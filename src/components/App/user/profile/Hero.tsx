@@ -1,10 +1,12 @@
+import {getSession} from '@/lib/getSession'
+
 import Image from 'next/image'
 import DefaultAvatarImage from '%/auth/default_avatar.jpg'
 
 import Heading from '#/UI/Heading'
 
-export default function Hero({session}) {
-  // console.log('🚀 ~ Hero ~ session:', session)
+export default async function Hero() {
+  const session = await getSession()
 
   return (
     <section className="flex items-center justify-center gap-5 sm:gap-3">
