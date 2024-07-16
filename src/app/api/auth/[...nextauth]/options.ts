@@ -118,11 +118,12 @@ export const options: NextAuthOptions = {
         // user is only available the first time this callback is called on a new session (after the user signs in)
         token.decoded = jwtDecode(user.access_token)
         token.access_token = user.access_token
-        token.expires_in = user.expires_in as number
+        token.expires_in = (nowTimeStamp + user.expires_in) as number
         token.refresh_token = user.refresh_token
         return token
-      } else if (typeof token.expires_in === 'number' && nowTimeStamp < token.expires_in) {
+      } else if (typeof token.expires_in === 'number' && nowTimeStamp < nowTimeStamp + token.expires_in) {
         // token has not expired yet, return it
+        console.log('Token has not expired. Will return...')
         return token
       } else {
         // token is expired, try to refresh it
