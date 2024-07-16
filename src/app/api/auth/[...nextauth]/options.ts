@@ -2,7 +2,7 @@ import type {NextAuthOptions} from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 import {jwtDecode} from 'jwt-decode'
-import {encrypt} from '@/utils/encryption'
+// import {encrypt} from '@/utils/encryption'
 
 import axios from 'axios'
 import {api} from '@/lib/backendApi'
@@ -111,7 +111,7 @@ export const options: NextAuthOptions = {
   },
   callbacks: {
     async jwt({token, user, session}) {
-      console.log('JWT Callback:', {token, user})
+      // console.log('JWT Callback:', {token, user})
       const nowTimeStamp: number = Math.floor(Date.now() / 1000)
 
       if (user) {
@@ -139,9 +139,15 @@ export const options: NextAuthOptions = {
     },
     async session({session, token}) {
       // console.log('Session Callback:', {session, token})
+      const decoded = token.decoded as {given_name: string; email: string; photo: string; access_token: string}
 
-      session.access_token = encrypt(token.access_token)
+      session.access_token = token.access_token
       session.error = token.error
+
+      session.user = {
+        login: decoded.given_name,
+        email: decoded.email,
+      }
       return session
     },
   },

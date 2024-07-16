@@ -6,12 +6,8 @@ declare module 'next-auth' {
     access_token: any
     error: any
     user: {
-      id: string
       login: string
       email: string
-      phone_number: string
-      photo: string
-      access_token: string
     }
   }
 
