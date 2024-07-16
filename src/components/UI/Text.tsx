@@ -8,7 +8,7 @@ interface Props {
 
 const Heading: React.FC<Props> = ({type, text, className}) => {
   if (type === 'h4') {
-    return <h4 className={cn(`text-2xl tracking-[-0.020em]`, className)} dangerouslySetInnerHTML={{__html: text || ''}} />
+    return <h4 className={cn(`text-2xl sm:text-xl tracking-[-0.020em]`, className)} dangerouslySetInnerHTML={{__html: text || ''}} />
   } else if (type === 'h5') {
     return <h5 dangerouslySetInnerHTML={{__html: text || ''}} />
   }

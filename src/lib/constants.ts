@@ -27,14 +27,17 @@ export const websitePaths = {
   profile: {
     reader: {
       text: 'Читательский кабинет',
+      text_mobile: 'Читатель',
       link: '/profile/reader',
     },
     author: {
       text: 'Авторский кабинет',
+      text_mobile: 'Автор',
       link: '/profile/author',
     },
     settings: {
       text: 'Настройки',
+      text_mobile: 'Настройки',
       link: '/profile/settings',
     },
   },

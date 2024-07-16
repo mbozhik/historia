@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@bozzhik/is-mobile':
+    specifier: ^0.1.1
+    version: 0.1.1
   '@hookform/resolvers':
     specifier: ^3.6.0
     version: 3.6.0(react-hook-form@7.52.0)
@@ -91,6 +94,10 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
+
+  /@bozzhik/is-mobile@0.1.1:
+    resolution: {integrity: sha512-b+BVf3EiYIiJFHD5ZBRBeGwBJ1Y0QZhyK0WpgNUofdzooBLZWAWuXaBr/OHyg7kxJOHhSu5sgRo07mudrJOMcQ==}
+    dev: false
 
   /@eslint-community/eslint-utils@4.4.0(eslint@8.57.0):
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
