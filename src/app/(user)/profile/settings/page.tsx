@@ -3,7 +3,7 @@ import {getSession} from '@/lib/getSession'
 import Link from 'next/link'
 import Container from '#/Global/Container'
 import Heading from '#/UI/Heading'
-import ChangeLogin from '##/user/profile/settings/ChangeLogin'
+import SettingsForm from '##/user/profile/SettingsForm'
 
 export default async function ProfilePage() {
   const session = await getSession()
@@ -16,7 +16,7 @@ export default async function ProfilePage() {
       </Container>
 
       <Container dataSection="user-profile-inputs" className="mt-10" width="1/2" padding={false}>
-        <ChangeLogin session={session} />
+        <SettingsForm session={session} />
       </Container>
     </>
   )

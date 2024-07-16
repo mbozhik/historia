@@ -6,7 +6,7 @@ import Heading from '#/UI/Heading'
 import Input from '#/UI/Input'
 import Button from '#/UI/Button'
 
-const ChangeLoginElement = ({register, errors, text, name, type, placeholder}) => {
+const FormInput = ({register, errors, text, name, type, placeholder}) => {
   return (
     <div className="space-y-3.5">
       <Heading type="h3" text={text} className="font-normal" />
@@ -15,7 +15,7 @@ const ChangeLoginElement = ({register, errors, text, name, type, placeholder}) =
   )
 }
 
-export default function ChangeLogin({session}) {
+export default function SettingsForm({session}) {
   const {
     register,
     handleSubmit,
@@ -30,9 +30,9 @@ export default function ChangeLogin({session}) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <section className="space-y-5">
         <div className="space-y-7">
-          <ChangeLoginElement text="Изменить логин" name="username" type="text" placeholder={session.user.login} register={register} errors={errors} />
-          <ChangeLoginElement text="Изменить почту" name="email" type="email" placeholder={session.user.email} register={register} errors={errors} />
-          <ChangeLoginElement text="Изменить пароль" name="password" type="text" placeholder="••••••" register={register} errors={errors} />
+          <FormInput text="Изменить логин" name="username" type="text" placeholder={session.user.login} register={register} errors={errors} />
+          <FormInput text="Изменить почту" name="email" type="email" placeholder={session.user.email} register={register} errors={errors} />
+          <FormInput text="Изменить пароль" name="password" type="text" placeholder="••••••" register={register} errors={errors} />
         </div>
 
         <Button buttonText="Сохранить" className="w-full mt-4" isSubmitting={isSubmitting} />
