@@ -146,6 +146,7 @@ export const options: NextAuthOptions = {
       session.error = token.error
 
       session.user = {
+        id: token.sub,
         login: decoded.given_name,
         email: decoded.email,
       }
