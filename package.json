@@ -11,7 +11,7 @@
   "dependencies": {
     "@bozzhik/is-mobile": "^0.1.1",
     "@hookform/resolvers": "^3.6.0",
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cryptr": "^6.3.0",
